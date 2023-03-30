@@ -1,21 +1,12 @@
-version: '3.9'
+version: '3.8'
+
 services:
   mysql:
-    image: mysql
-    cap_add:
-      - SYS_NICE
-    restart: always
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: mysql_macos
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 12345678
-      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-      MYSQL_RANDOM_ROOT_PASSWORD: "no"
-      MYSQL_ONETIME_PASSWORD: "no"
-      MYSQL_INITDB_SKIP_TZINFO: "yes"
+    image: mysql/mysql-server
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    command: --bind-address=0.0.0.0
